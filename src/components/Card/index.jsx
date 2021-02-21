@@ -1,0 +1,12 @@
+import React from 'react'
+import './style.css'
+export default function Card({title, children}) {
+  return <div className="box">
+    <header>
+      <h2>{title}</h2>
+    </header>
+    <div className="card__content space-even">
+      {children}
+    </div>
+  </div>
+}

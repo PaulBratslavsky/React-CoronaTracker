@@ -1,0 +1,19 @@
+.info-box {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.info-box header {
+  text-align: center;
+  font-size: 1.4rem;
+}
+.info-box__content {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  padding: 2rem;
+  font-weight: bold;
+  color: var(--primary);
+}
