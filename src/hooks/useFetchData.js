@@ -6,7 +6,7 @@ export const useFetchData = (query) => {
   const initialState = {
     status: "idle",
     error: null,
-    data: [],
+    data: null,
   };
 
   const [state, dispatch] = useReducer((state, action) => {
@@ -24,7 +24,9 @@ export const useFetchData = (query) => {
 
   useEffect(() => {
     let cancelRequest = false;
-
+  
+    if (query === undefined) return;
+    
     const fetchData = async () => {
       dispatch({ type: "FETCHING" });
 
@@ -48,5 +50,6 @@ export const useFetchData = (query) => {
     return () => (cancelRequest = true);
   }, [query]);
 
+  // console.log(cache, "saved to cashe")
   return { ...state };
 };

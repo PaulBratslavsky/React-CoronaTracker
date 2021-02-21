@@ -2,21 +2,20 @@ import React, { useState, useEffect } from "react";
 import { useFetchData } from "../../hooks/useFetchData";
 import './style.css';
 
-export default function GetCountrySelect({ setSelectedCountry }) {
+export default function GetCountrySelect({setSelectedCountry}) {
   const QUERY = "https://disease.sh/v3/covid-19/countries";
   const { data, error } = useFetchData(QUERY);
   const [selected, setSelected] = useState("USA");
 
   useEffect(() => {
-    const selectedCountry = data.filter(
-      (item) => item.country.toLowerCase() === selected.toLowerCase()
-    );
-    setSelectedCountry(selectedCountry[0]);
-  }, [selected, data, setSelectedCountry]);
+    setSelectedCountry(selected);
+  }, [selected]);
 
   const handleSelect = (event) => {
     setSelected(event.target.value);
   };
+
+  if (!data) return null;
 
   if (error) return <h2>{error}</h2>;
   return (
@@ -28,6 +27,9 @@ export default function GetCountrySelect({ setSelectedCountry }) {
         onChange={handleSelect}
         value={selected}
       >
+        <option key="All" value="All">
+            All
+          </option>
         {data.map((item) => (
           <option key={item.country} value={item.country}>
             {item.country}
