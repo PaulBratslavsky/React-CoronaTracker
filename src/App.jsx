@@ -6,7 +6,8 @@ import Table from "./components/table";
 import Graph from "./components/graph";
 import Map from "./components/map";
 import Loader from "./components/loader";
-import Card from "./components/Card";
+import Card from "./components/card";
+import AsideHeader from "./components/asideHeader"
 import { useFetchData } from './hooks/useFetchData'
 import { convertNumber } from './utils/convertNumber'
 
@@ -23,21 +24,14 @@ function App() {
   }
       
   const { data, error } = useFetchData(query);
-
+  console.log(data)
   return (
     <div className="app">
       <Header setSelectedCountry={setSelectedCountry} />
       {data ? (
         <div className="app__grid">
           <aside className="box">
-              <h1>{data.country || "All Countries"}</h1>
-              { data.country && 
-                <img
-                className="flag"
-                src={data.countryInfo.flag}
-                alt={`${data.country} flag.`}
-              />
-              }
+            <AsideHeader data={data} />  
             <Table />
             <Graph />
           </aside>
