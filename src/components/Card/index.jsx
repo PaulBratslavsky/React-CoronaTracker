@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
 export default function Card({title, children}) {
-  return <div className="box">
+  return <div className="card">
     <header>
       <h2>{title}</h2>
     </header>

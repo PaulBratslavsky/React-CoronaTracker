@@ -40,7 +40,7 @@ function App() {
             <Table />
             <Graph />
           </aside>
-          <main>
+          <main className="main_grid">
             <Card title="Coronavirus Cases">
               <InfoBox title="Today" content={data.todayCases} />
               <InfoBox title="Total" content={data.cases} />

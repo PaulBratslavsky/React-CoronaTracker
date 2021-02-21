@@ -1,12 +1,14 @@
 .info-box {
   display: flex;
   flex-direction: column-reverse;
+  
 }
 
 .info-box header {
   text-align: center;
   font-size: 1.4rem;
 }
+
 .info-box__content {
   padding-top: 1rem;
   display: flex;

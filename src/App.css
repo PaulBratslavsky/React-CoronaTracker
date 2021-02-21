@@ -11,6 +11,12 @@
   grid-gap: 1rem;
 }
 
+.main_grid {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 2fr;
+  grid-gap: 1rem;
+}
+
 aside h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
@@ -19,4 +25,5 @@ aside h1 {
 aside img {
   width: 100%;
   object-fit: cover;
+  margin-bottom: 1rem;
 }
