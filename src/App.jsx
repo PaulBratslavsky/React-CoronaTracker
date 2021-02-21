@@ -8,6 +8,7 @@ import Map from "./components/map";
 import Loader from "./components/loader";
 import Card from "./components/Card";
 import { useFetchData } from './hooks/useFetchData'
+import { convertNumber } from './utils/convertNumber'
 
 const QUERY_BASE = "https://disease.sh/v3/covid-19/";
 
@@ -42,16 +43,16 @@ function App() {
           </aside>
           <main className="main_grid">
             <Card title="Coronavirus Cases">
-              <InfoBox title="Today" content={data.todayCases} />
-              <InfoBox title="Total" content={data.cases} />
+              <InfoBox title="Today" content={convertNumber(data.todayCases)} />
+              <InfoBox title="Total" content={convertNumber(data.cases)} />
             </Card>
             <Card title="Coronavirus Recovered">
-              <InfoBox title="Today" content={data.todayRecovered} />
-              <InfoBox title="Total" content={data.recovered} />
+              <InfoBox title="Today" content={convertNumber(data.todayRecovered)} />
+              <InfoBox title="Total" content={convertNumber(data.recovered)} />
             </Card>
             <Card title="Coronavirus Deaths">
-              <InfoBox title="Today" content={data.todayDeaths} />
-              <InfoBox title="Total" content={data.deaths} />
+              <InfoBox title="Today" content={convertNumber(data.todayDeaths)} />
+              <InfoBox title="Total" content={convertNumber(data.deaths)} />
             </Card>
             <Map />
           </main>
