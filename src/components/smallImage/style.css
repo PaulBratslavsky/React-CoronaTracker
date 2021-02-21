@@ -1,0 +1,5 @@
+.small-image {
+  object-fit: cover;
+  height: 35px;
+  width: 55px;
+}

@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useFetchData } from "../../hooks/useFetchData";
 import './style.css';
 
-export default function GetCountrySelect({setSelectedCountry}) {
+export default function GetCountrySelect({setSelectedCountry, setAllCountries}) {
   const QUERY = "https://disease.sh/v3/covid-19/countries";
   const { data, error } = useFetchData(QUERY);
-  const [selected, setSelected] = useState("USA");
+  const [selected, setSelected] = useState("All");
 
   useEffect(() => {
     setSelectedCountry(selected);
-  }, [selected]);
+    setAllCountries(data)
+  }, [selected, data]);
 
   const handleSelect = (event) => {
     setSelected(event.target.value);

@@ -7,16 +7,20 @@ import Graph from "./components/graph";
 import Map from "./components/map";
 import Loader from "./components/loader";
 import Card from "./components/card";
+import SmallImage from "./components/smallImage";
 import AsideHeader from "./components/asideHeader"
 import { useFetchData } from './hooks/useFetchData'
 import { convertNumber } from './utils/convertNumber'
 
 const QUERY_BASE = "https://disease.sh/v3/covid-19/";
 
+const TableColumn = props => <div {...props} /> 
+
 function App() {
   let query;
   const [selectedCountry, setSelectedCountry] = useState();
-   
+  const [allCountries, setAllCountries] = useState([]);
+
   if (selectedCountry) {
     query = selectedCountry === 'All' 
     ? QUERY_BASE + selectedCountry
@@ -27,12 +31,20 @@ function App() {
   console.log(data)
   return (
     <div className="app">
-      <Header setSelectedCountry={setSelectedCountry} />
+      <Header setSelectedCountry={setSelectedCountry} setAllCountries={setAllCountries}/>
       {data ? (
         <div className="app__grid">
           <aside className="box">
             <AsideHeader data={data} />  
-            <Table />
+            { selectedCountry === 'All' &&
+            <Table sourceData={allCountries} onClick={data => console.log(data)}>
+              <TableColumn source="country" label="Country" />
+              <TableColumn source="population" label="Population" number />
+              <TableColumn source="cases" label="Cases" number />
+              <TableColumn source="deaths" label="Deaths" number />
+              <TableColumn source="recovered" label="Recovered" number />
+              <TableColumn source="countryInfo" label="Flag" render={data => <SmallImage src={data} alt="flag" />}/>
+            </Table> }
             <Graph />
           </aside>
           <main className="main_grid">
