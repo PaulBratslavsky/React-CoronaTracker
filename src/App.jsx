@@ -6,7 +6,7 @@ import Table from "./components/table";
 import Graph from "./components/graph";
 import Map from "./components/map";
 import Loader from "./components/loader";
-import Card from "./components/card";
+// import Card from "./components/card";
 import SmallImage from "./components/smallImage";
 import AsideHeader from "./components/asideHeader"
 import { useFetchData } from './hooks/useFetchData'
@@ -48,7 +48,7 @@ function App() {
             <Graph />
           </aside>
           <main className="main_grid">
-            <Card title="Coronavirus Cases">
+            {/* <Card title="Coronavirus Cases">
               <InfoBox title="Today" content={convertNumber(data.todayCases)} />
               <InfoBox title="Total" content={convertNumber(data.cases)} />
             </Card>
@@ -59,7 +59,7 @@ function App() {
             <Card title="Coronavirus Deaths">
               <InfoBox title="Today" content={convertNumber(data.todayDeaths)} />
               <InfoBox title="Total" content={convertNumber(data.deaths)} />
-            </Card>
+            </Card> */}
             <Map />
           </main>
         </div>
