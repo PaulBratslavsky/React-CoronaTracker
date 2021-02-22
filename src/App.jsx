@@ -6,11 +6,11 @@ import Table from "./components/table";
 import Graph from "./components/graph";
 import Map from "./components/map";
 import Loader from "./components/loader";
-// import Card from "./components/card";
 import SmallImage from "./components/smallImage";
 import AsideHeader from "./components/asideHeader"
 import { useFetchData } from './hooks/useFetchData'
 import { convertNumber } from './utils/convertNumber'
+import MyCard from "./components/myCard";
 
 const QUERY_BASE = "https://disease.sh/v3/covid-19/";
 
@@ -38,6 +38,7 @@ function App() {
             <AsideHeader data={data} />  
             { selectedCountry === 'All' &&
             <Table sourceData={allCountries} onClick={data => console.log(data)}>
+              <TableColumn source="id" label="#" index/>
               <TableColumn source="country" label="Country" />
               <TableColumn source="population" label="Population" number />
               <TableColumn source="cases" label="Cases" number />
@@ -48,18 +49,18 @@ function App() {
             <Graph />
           </aside>
           <main className="main_grid">
-            {/* <Card title="Coronavirus Cases">
+            <MyCard title="Coronavirus Cases">
               <InfoBox title="Today" content={convertNumber(data.todayCases)} />
               <InfoBox title="Total" content={convertNumber(data.cases)} />
-            </Card>
-            <Card title="Coronavirus Recovered">
+            </MyCard>
+            <MyCard title="Coronavirus Recovered">
               <InfoBox title="Today" content={convertNumber(data.todayRecovered)} />
               <InfoBox title="Total" content={convertNumber(data.recovered)} />
-            </Card>
-            <Card title="Coronavirus Deaths">
+            </MyCard>
+            <MyCard title="Coronavirus Deaths">
               <InfoBox title="Today" content={convertNumber(data.todayDeaths)} />
               <InfoBox title="Total" content={convertNumber(data.deaths)} />
-            </Card> */}
+            </MyCard>
             <Map />
           </main>
         </div>

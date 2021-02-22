@@ -11,10 +11,9 @@ export default function Table({children, sourceData, onClick}) {
     if (sourceData) setData(sourceData)
   }, [sourceData]);
     
-  return <div className="table">
+  return <table className="table">
     <thead>
       <tr>
-        <th>#</th>
         { columns.map( column => <th>{column.props.label}</th>)}
      </tr>
     </thead>
@@ -22,5 +21,5 @@ export default function Table({children, sourceData, onClick}) {
     <tbody>
       { data.map( (row, index) => <TableRow key={row.id} row={row} columns={columns} index={index} onClick={onClick}/> )}
     </tbody>
-  </div>
+  </table>
 }
