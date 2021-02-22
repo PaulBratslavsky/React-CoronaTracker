@@ -5,7 +5,7 @@ export default function MyCard({title, children}) {
     <header>
       <h2>{title}</h2>
     </header>
-    <div className="card__content space-even">
+    <div className="card__content">
       {children}
     </div>
   </div>

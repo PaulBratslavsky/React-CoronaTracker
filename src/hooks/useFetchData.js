@@ -2,7 +2,7 @@ import { useEffect, useReducer, useRef } from "react";
 
 export const useFetchData = (query) => {
   const cache = useRef({});
-
+  console.log(query, 'test')
   const initialState = {
     status: "idle",
     error: null,

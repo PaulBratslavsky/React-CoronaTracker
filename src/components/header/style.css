@@ -1,25 +1,20 @@
 .header {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-@media ( max-width: 820px ) {
-  .header {
-    flex-direction: column;
-  }
+.header label {
+  display: block;
+  text-align: center;
+}
 
-  .header label {
-    display: block;
-    text-align: center;
-  }
+.header__select {
+  width: 100%;
+}
 
-  .header__select {
-    width: 100%;
-  }
-
-  select {
-    width: inherit;
-  }
+select {
+  width: inherit;
 }

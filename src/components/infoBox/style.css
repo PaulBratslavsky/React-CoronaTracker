@@ -14,8 +14,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 4rem;
-  padding: 2rem;
+  font-size: 3.5rem;
+  padding: 1.5rem;
   font-weight: bold;
   color: var(--primary);
 }

@@ -1,14 +1,16 @@
 .table {
-  display: block;
+  height: 800px;
   overflow: scroll;
-  height: 500px;
+}
+
+table {
   width: 100%;
   color: #adb5bd;
   text-align: left;
   border-collapse: collapse;
   border-spacing: 1px;
   margin-bottom: 1.5rem;  
-}
+} 
 
 thead {
   vertical-align: middle;

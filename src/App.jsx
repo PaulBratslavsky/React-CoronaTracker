@@ -35,7 +35,8 @@ function App() {
       {data ? (
         <div className="app__grid">
           <aside className="box">
-            <AsideHeader data={data} />  
+            <AsideHeader data={data} /> 
+            <Graph data={data} /> 
             { selectedCountry === 'All' &&
             <Table sourceData={allCountries} onClick={data => console.log(data)}>
               <TableColumn source="id" label="#" index/>
@@ -46,7 +47,6 @@ function App() {
               <TableColumn source="recovered" label="Recovered" number />
               <TableColumn source="countryInfo" label="Flag" render={data => <SmallImage src={data} alt="flag" />}/>
             </Table> }
-            <Graph />
           </aside>
           <main className="main_grid">
             <MyCard title="Coronavirus Cases">

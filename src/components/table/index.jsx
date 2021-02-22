@@ -10,8 +10,9 @@ export default function Table({children, sourceData, onClick}) {
   React.useEffect(() => {
     if (sourceData) setData(sourceData)
   }, [sourceData]);
-    
-  return <table className="table">
+  
+  return <div className="table">
+    <table>
     <thead>
       <tr>
         { columns.map( column => <th>{column.props.label}</th>)}
@@ -21,5 +22,5 @@ export default function Table({children, sourceData, onClick}) {
     <tbody>
       { data.map( (row, index) => <TableRow key={row.id} row={row} columns={columns} index={index} onClick={onClick}/> )}
     </tbody>
-  </table>
+  </table></div>
 }

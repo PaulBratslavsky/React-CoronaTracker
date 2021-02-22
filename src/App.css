@@ -6,9 +6,7 @@
 }
 
 .app__grid {
-  display: grid;
-  grid-template-columns: 2fr 3fr;
-  grid-gap: 1rem;
+  display: block;
 }
 
 .main_grid {
@@ -17,8 +15,3 @@
   grid-gap: 1rem;
 }
 
-@media ( max-width: 820px ) {
-  .app__grid {
-    display: block;
-  }
-}
