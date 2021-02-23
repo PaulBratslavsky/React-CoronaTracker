@@ -2,23 +2,22 @@ import React, { useState, useEffect } from "react";
 import { useFetchData } from "../../hooks/useFetchData";
 import './style.css';
 
-export default function GetCountrySelect({setSelectedCountry, setAllCountries}) {
+export default function GetCountrySelect({setSelectedCountry, setAllCountries, selectedCountry}) {
   const QUERY = "https://disease.sh/v3/covid-19/countries";
   const { data, error } = useFetchData(QUERY);
-  const [selected, setSelected] = useState("All");
 
   useEffect(() => {
-    setSelectedCountry(selected);
     setAllCountries(data)
-  }, [selected, data]);
+  }, [data]);
 
   const handleSelect = (event) => {
-    setSelected(event.target.value);
+    setSelectedCountry(event.target.value);
   };
 
   if (!data) return null;
-
+  
   if (error) return <h2>{error}</h2>;
+
   return (
     <div className="header__select">
       <label htmlFor="countries">Choose a country</label>
@@ -26,7 +25,7 @@ export default function GetCountrySelect({setSelectedCountry, setAllCountries}) 
         name="countries"
         id="countries"
         onChange={handleSelect}
-        value={selected}
+        value={selectedCountry}
       >
         <option key="All" value="All">
             All

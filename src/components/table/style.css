@@ -23,6 +23,12 @@ td, th {
 
 tr {
   display: table-row;
-  vertical-align: bottom;
+  vertical-align: center;
   border-bottom: 2px solid #3a4250;
 } 
+
+tr:hover {
+  background: var(--grey);
+  color: var(--white);
+  transition: all 0.5s ease-in-out;
+}

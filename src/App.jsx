@@ -18,7 +18,7 @@ const TableColumn = props => <div {...props} />
 
 function App() {
   let query;
-  const [selectedCountry, setSelectedCountry] = useState();
+  const [selectedCountry, setSelectedCountry] = useState('All');
   const [allCountries, setAllCountries] = useState([]);
 
   if (selectedCountry) {
@@ -31,14 +31,14 @@ function App() {
   console.log(data)
   return (
     <div className="app">
-      <Header setSelectedCountry={setSelectedCountry} setAllCountries={setAllCountries}/>
+      <Header setSelectedCountry={setSelectedCountry} selectedCountry={selectedCountry} setAllCountries={setAllCountries} />
       {data ? (
         <div className="app__grid">
           <aside className="box">
             <AsideHeader data={data} /> 
             <Graph data={data} /> 
             { selectedCountry === 'All' &&
-            <Table sourceData={allCountries} onClick={data => console.log(data)}>
+            <Table sourceData={allCountries} onClick={(country) => setSelectedCountry(country)}>
               <TableColumn source="id" label="#" index/>
               <TableColumn source="country" label="Country" />
               <TableColumn source="population" label="Population" number />
