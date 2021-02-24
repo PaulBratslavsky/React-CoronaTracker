@@ -1,0 +1,33 @@
+.map-box {
+  opacity: 1;
+}
+
+.map-box div {
+  position: relative;
+  height: 100%;
+  cursor: pointer;
+}
+.map-box button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  border: solid 2px var(--primary);
+  color: var(--primary);
+  background: var(--secondary);
+  height: 30px;
+  width: 30px;
+  border-radius: 8px;
+  font-size: 1.4rem;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: var(--secondary);
+}
+
+.leaflet-layer {
+  background: var(--secondary);
+}

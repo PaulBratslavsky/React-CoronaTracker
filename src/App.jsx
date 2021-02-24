@@ -4,7 +4,7 @@ import Header from "./components/header";
 import InfoBox from "./components/infoBox";
 import Table from "./components/table";
 import Graph from "./components/graph";
-import Map from "./components/map";
+import MapBox from "./components/mapBox";
 import Loader from "./components/loader";
 import SmallImage from "./components/smallImage";
 import AsideHeader from "./components/asideHeader"
@@ -61,7 +61,7 @@ function App() {
               <InfoBox title="Today" content={convertNumber(data.todayDeaths)} />
               <InfoBox title="Total" content={convertNumber(data.deaths)} />
             </MyCard>
-            <Map />
+            <MapBox />
           </main>
         </div>
       ) : (
