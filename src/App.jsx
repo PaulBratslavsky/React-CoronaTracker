@@ -4,7 +4,6 @@ import Header from "./components/header";
 import InfoBox from "./components/infoBox";
 import Table from "./components/table";
 import Graph from "./components/graph";
-import MapBox from "./components/mapBox";
 import MapBoxTwo from "./components/mapBoxTwo";
 import Loader from "./components/loader";
 import SmallImage from "./components/smallImage";
@@ -29,8 +28,8 @@ function App() {
         : QUERY_BASE + "countries/" + selectedCountry;
   }
 
-  const { data, error } = useFetchData(query);
-  console.log(data);
+  const { data } = useFetchData(query);
+
   return (
     <div className="app">
       <Header

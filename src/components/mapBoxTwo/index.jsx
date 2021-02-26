@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MapContainer, TileLayer } from "react-leaflet";
+import { MapContainer, TileLayer, Circle } from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
 import "./style.css";
@@ -15,38 +15,43 @@ const MAP_URL = `https://api.mapbox.com/styles/v1/${username}/${styleId}/tiles/$
 const attribution =
   '&copy; <a href="https://www.mapbox.com/">MapBox</a> contributors';
 
+const initialView = [34.80746, -40.4796];
+
+function calcRadiusSize(country, casesType, caseType) {
+  return Math.sqrt(country[casesType]) * caseTypeColors[caseType].multiplier;
+}
+
+const caseTypeColors = {
+  cases: {
+    hex: "#cc1034",
+    multiplier: 800,
+  },
+};
+
+
 export default function MapBoxTwo({ data }) {
-  const [center, setCenter] = useState(null);
 
-  useEffect(() => {
-    if (data.country === undefined) {
-      setCenter({ lat: 34.80746, lng: -40.4796 });
-    }
-
-    if (data.country !== undefined) {
-      const { countryInfo } = data;
-      const newObject = Object.assign(
-        {},
-        { lat: countryInfo.lat, lng: countryInfo.long }
-      );
-      setCenter(newObject);
-    }
-  }, [data]);
-
-  if (!center) return <Loader />;
-
-  console.log(data.country, "show me", center);
-
-  return (
+  const SingleCountryView = ({data}) => (
     <div className="map-box-two box">
-      {data.country ? <h1>{data.country}</h1>  : <h1>ALL</h1>}
-      <MapContainer
-        center={center}
-        zoom={data.country ? 5 : 2}
-        scrollWheelZoom={false}
-      >
+      <MapContainer center={[data.countryInfo.lat, data.countryInfo.long]} zoom={4} scrollWheelZoom={false}>
         <TileLayer attribution={attribution} url={MAP_URL} />
       </MapContainer>
     </div>
   );
+
+  const AllCountriesView = () => (
+    <div className="map-box-two box">
+      <MapContainer center={initialView} zoom={2} scrollWheelZoom={false}>
+        <TileLayer attribution={attribution} url={MAP_URL} />
+      </MapContainer>
+    </div>
+  );
+
+  if (!data) return <Loader />;
+
+  if (data.country) {
+    return <SingleCountryView data={data}/>;
+  } else {
+    return <AllCountriesView data={data}/>;
+  }
 }
