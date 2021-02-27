@@ -1,5 +1,11 @@
 import React from "react";
-import { MapContainer, TileLayer, Circle } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Circle,
+  CircleMarker,
+  Popup,
+} from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
 import "./style.css";
@@ -21,18 +27,15 @@ export default function MapBoxTwo({ data, allCountries }) {
   const SingleCountryView = ({ data }) => {
     const deathsPercent = (data.deaths / data.cases) * 100;
     const recoveredPercent = (data.recovered / data.cases) * 100;
-
     const radius = 1000000;
+    const position = [data.countryInfo.lat, data.countryInfo.long];
     return (
       <div className="map-box-two box">
-        <MapContainer
-          center={[data.countryInfo.lat, data.countryInfo.long]}
-          zoom={4}
-          scrollWheelZoom={false}
-        >
+        <MapContainer center={position} zoom={4} scrollWheelZoom={false}>
           <TileLayer attribution={attribution} url={MAP_URL} />
+
           <Circle
-            center={[data.countryInfo.lat, data.countryInfo.long]}
+            center={position}
             radius={radius}
             pathOptions={{
               color: "#393e46",
@@ -41,7 +44,7 @@ export default function MapBoxTwo({ data, allCountries }) {
             }}
           />
           <Circle
-            center={[data.countryInfo.lat, data.countryInfo.long]}
+            center={position}
             radius={(recoveredPercent / 100) * radius}
             pathOptions={{
               color: "#ffd369",
@@ -50,7 +53,7 @@ export default function MapBoxTwo({ data, allCountries }) {
             }}
           />
           <Circle
-            center={[data.countryInfo.lat, data.countryInfo.long]}
+            center={position}
             radius={(deathsPercent / 100) * radius}
             pathOptions={{
               color: "#8a0832",
@@ -58,6 +61,18 @@ export default function MapBoxTwo({ data, allCountries }) {
               fillOpacity: "0.5",
             }}
           />
+
+          <CircleMarker
+            center={position}
+            pathOptions={{
+              color: "#8a0832",
+              opacity: "0.8",
+              fillOpacity: "0.5",
+            }}
+            radius={20}
+          >
+            <Popup>Popup in CircleMarker</Popup>
+          </CircleMarker>
         </MapContainer>
       </div>
     );
@@ -69,14 +84,16 @@ export default function MapBoxTwo({ data, allCountries }) {
         <TileLayer attribution={attribution} url={MAP_URL} />
         {allCountries &&
           allCountries.map((country) => {
+              console.log(country)
             const deathsPercent = (country.deaths / country.cases) * 100;
             const recoveredPercent = (country.recovered / country.cases) * 100;
+            const position = [country.countryInfo.lat, country.countryInfo.long];
 
             const radius = 200000;
             return (
               <>
                 <Circle
-                  center={[country.countryInfo.lat, country.countryInfo.long]}
+                  center={position}
                   radius={radius}
                   pathOptions={{
                     color: "#393e46",
@@ -85,7 +102,7 @@ export default function MapBoxTwo({ data, allCountries }) {
                   }}
                 />
                 <Circle
-                  center={[country.countryInfo.lat, country.countryInfo.long]}
+                  center={position}
                   radius={(recoveredPercent / 100) * radius}
                   pathOptions={{
                     color: "#ffd369",
@@ -94,7 +111,7 @@ export default function MapBoxTwo({ data, allCountries }) {
                   }}
                 />
                 <Circle
-                  center={[country.countryInfo.lat, country.countryInfo.long]}
+                  center={position}
                   radius={(deathsPercent / 100) * radius}
                   pathOptions={{
                     color: "#8a0832",
@@ -102,6 +119,17 @@ export default function MapBoxTwo({ data, allCountries }) {
                     fillOpacity: "0.5",
                   }}
                 />
+                <CircleMarker
+                  center={position}
+                  pathOptions={{
+                    color: "#8a0832",
+                    opacity: "0.8",
+                    fillOpacity: "0.2",
+                  }}
+                  radius={20}
+                >
+                  <Popup>Popup in CircleMarker</Popup>
+                </CircleMarker>
               </>
             );
           })}
@@ -117,3 +145,4 @@ export default function MapBoxTwo({ data, allCountries }) {
     return <AllCountriesView data={data} />;
   }
 }
+  
