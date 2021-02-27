@@ -80,7 +80,7 @@ function App() {
               />
               <InfoBox title="Total" content={convertNumber(data.deaths)} />
             </MyCard>
-            <MapBoxTwo data={data} />
+            <MapBoxTwo data={data} allCountries={allCountries}/>
           </main>
         </div>
       ) : (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { MapContainer, TileLayer, Circle } from "react-leaflet";
 
 import "leaflet/dist/leaflet.css";
@@ -17,28 +17,94 @@ const attribution =
 
 const initialView = [34.80746, -40.4796];
 
-export default function MapBoxTwo({ data }) {
+export default function MapBoxTwo({ data, allCountries }) {
+  const SingleCountryView = ({ data }) => {
+    const deathsPercent = (data.deaths / data.cases) * 100;
+    const recoveredPercent = (data.recovered / data.cases) * 100;
 
-  const deathsPercent = (data.deaths / data.cases) *  100;
-  const recoveredPercent = (data.recovered / data.cases) * 100;
-
-  const radius = 1000000;
-
-  const SingleCountryView = ({data}) => (
-    <div className="map-box-two box">
-      <MapContainer center={[data.countryInfo.lat, data.countryInfo.long]} zoom={4} scrollWheelZoom={false}>
-        <TileLayer attribution={attribution} url={MAP_URL} />
-        <Circle center={[data.countryInfo.lat, data.countryInfo.long]} radius={radius} pathOptions={{ color: '#393e46', opacity:'0.8', fillOpacity: '0.5' }}/>
-        <Circle center={[data.countryInfo.lat, data.countryInfo.long]} radius={recoveredPercent / 100 * radius} pathOptions={{ color: '#ffd369', opacity:'0.8', fillOpacity: '0.5' }}/>
-        <Circle center={[data.countryInfo.lat, data.countryInfo.long]} radius={deathsPercent / 100 * radius} pathOptions={{ color: '#8a0832', opacity:'0.8', fillOpacity: '0.5' }}/>
-      </MapContainer>
-    </div>
-  );
+    const radius = 1000000;
+    return (
+      <div className="map-box-two box">
+        <MapContainer
+          center={[data.countryInfo.lat, data.countryInfo.long]}
+          zoom={4}
+          scrollWheelZoom={false}
+        >
+          <TileLayer attribution={attribution} url={MAP_URL} />
+          <Circle
+            center={[data.countryInfo.lat, data.countryInfo.long]}
+            radius={radius}
+            pathOptions={{
+              color: "#393e46",
+              opacity: "0.8",
+              fillOpacity: "0.5",
+            }}
+          />
+          <Circle
+            center={[data.countryInfo.lat, data.countryInfo.long]}
+            radius={(recoveredPercent / 100) * radius}
+            pathOptions={{
+              color: "#ffd369",
+              opacity: "0.8",
+              fillOpacity: "0.5",
+            }}
+          />
+          <Circle
+            center={[data.countryInfo.lat, data.countryInfo.long]}
+            radius={(deathsPercent / 100) * radius}
+            pathOptions={{
+              color: "#8a0832",
+              opacity: "0.8",
+              fillOpacity: "0.5",
+            }}
+          />
+        </MapContainer>
+      </div>
+    );
+  };
 
   const AllCountriesView = () => (
     <div className="map-box-two box">
       <MapContainer center={initialView} zoom={2} scrollWheelZoom={false}>
         <TileLayer attribution={attribution} url={MAP_URL} />
+        {allCountries &&
+          allCountries.map((country) => {
+            const deathsPercent = (country.deaths / country.cases) * 100;
+            const recoveredPercent = (country.recovered / country.cases) * 100;
+
+            const radius = 200000;
+            return (
+              <>
+                <Circle
+                  center={[country.countryInfo.lat, country.countryInfo.long]}
+                  radius={radius}
+                  pathOptions={{
+                    color: "#393e46",
+                    opacity: "0.8",
+                    fillOpacity: "0.5",
+                  }}
+                />
+                <Circle
+                  center={[country.countryInfo.lat, country.countryInfo.long]}
+                  radius={(recoveredPercent / 100) * radius}
+                  pathOptions={{
+                    color: "#ffd369",
+                    opacity: "0.8",
+                    fillOpacity: "0.5",
+                  }}
+                />
+                <Circle
+                  center={[country.countryInfo.lat, country.countryInfo.long]}
+                  radius={(deathsPercent / 100) * radius}
+                  pathOptions={{
+                    color: "#8a0832",
+                    opacity: "0.8",
+                    fillOpacity: "0.5",
+                  }}
+                />
+              </>
+            );
+          })}
       </MapContainer>
     </div>
   );
@@ -46,8 +112,8 @@ export default function MapBoxTwo({ data }) {
   if (!data) return <Loader />;
 
   if (data.country) {
-    return <SingleCountryView data={data}/>;
+    return <SingleCountryView data={data} />;
   } else {
-    return <AllCountriesView data={data}/>;
+    return <AllCountriesView data={data} />;
   }
 }
