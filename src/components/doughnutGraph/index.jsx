@@ -10,8 +10,8 @@ export default function DoughnutGraph({data}) {
     datasets: [
       {
         backgroundColor: [
-          '#ffd369',
           '#393e46',
+          '#ffd369',
           '#8a0832'
         ],
         data: [cases, recovered, deaths ]

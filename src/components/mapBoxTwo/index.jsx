@@ -17,24 +17,20 @@ const attribution =
 
 const initialView = [34.80746, -40.4796];
 
-function calcRadiusSize(country, casesType, caseType) {
-  return Math.sqrt(country[casesType]) * caseTypeColors[caseType].multiplier;
-}
-
-const caseTypeColors = {
-  cases: {
-    hex: "#cc1034",
-    multiplier: 800,
-  },
-};
-
-
 export default function MapBoxTwo({ data }) {
+
+  const deathsPercent = (data.deaths / data.cases) *  100;
+  const recoveredPercent = (data.recovered / data.cases) * 100;
+
+  const radius = 1000000;
 
   const SingleCountryView = ({data}) => (
     <div className="map-box-two box">
       <MapContainer center={[data.countryInfo.lat, data.countryInfo.long]} zoom={4} scrollWheelZoom={false}>
         <TileLayer attribution={attribution} url={MAP_URL} />
+        <Circle center={[data.countryInfo.lat, data.countryInfo.long]} radius={radius} pathOptions={{ color: '#393e46', opacity:'0.8', fillOpacity: '0.5' }}/>
+        <Circle center={[data.countryInfo.lat, data.countryInfo.long]} radius={recoveredPercent / 100 * radius} pathOptions={{ color: '#ffd369', opacity:'0.8', fillOpacity: '0.5' }}/>
+        <Circle center={[data.countryInfo.lat, data.countryInfo.long]} radius={deathsPercent / 100 * radius} pathOptions={{ color: '#8a0832', opacity:'0.8', fillOpacity: '0.5' }}/>
       </MapContainer>
     </div>
   );

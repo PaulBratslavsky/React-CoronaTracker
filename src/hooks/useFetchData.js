@@ -2,7 +2,6 @@ import { useEffect, useReducer, useRef } from "react";
 
 export const useFetchData = (query) => {
   const cache = useRef({});
-  console.log(query, 'test')
   const initialState = {
     status: "idle",
     error: null,
@@ -24,9 +23,9 @@ export const useFetchData = (query) => {
 
   useEffect(() => {
     let cancelRequest = false;
-  
+
     if (query === undefined) return;
-    
+
     const fetchData = async () => {
       dispatch({ type: "FETCHING" });
 
