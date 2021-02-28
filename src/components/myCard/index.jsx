@@ -1,7 +1,7 @@
 import React from 'react'
 import './style.css'
-export default function MyCard({title, children}) {
-  return <div className="card">
+export default function MyCard({title, className, children}) {
+  return <div className={`card ${className && className}`}>
     <header>
       <h2>{title}</h2>
     </header>

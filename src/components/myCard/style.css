@@ -1,4 +1,6 @@
 .card {
+  display: grid;
+  grid-gap: 16px;
   width: 100%;
   background: var(--secondary);
   padding: 1rem;

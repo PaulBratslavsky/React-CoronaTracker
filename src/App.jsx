@@ -39,7 +39,7 @@ function App() {
       />
       {data ? (
         <div className="app__grid">
-          <aside className="box">
+          <aside className="box aside">
             <AsideHeader data={data} />
             <Graph data={data} />
             {selectedCountry === "All" && (
@@ -61,27 +61,24 @@ function App() {
               </Table>
             )}
           </aside>
-          <main className="main_grid">
-            <MyCard title="Coronavirus Cases">
-              <InfoBox title="Today" content={convertNumber(data.todayCases)} />
-              <InfoBox title="Total" content={convertNumber(data.cases)} />
-            </MyCard>
-            <MyCard title="Coronavirus Recovered">
-              <InfoBox
-                title="Today"
-                content={convertNumber(data.todayRecovered)}
-              />
-              <InfoBox title="Total" content={convertNumber(data.recovered)} />
-            </MyCard>
-            <MyCard title="Coronavirus Deaths">
-              <InfoBox
-                title="Today"
-                content={convertNumber(data.todayDeaths)}
-              />
-              <InfoBox title="Total" content={convertNumber(data.deaths)} />
-            </MyCard>
-            <MapBoxTwo data={data} allCountries={allCountries}/>
-          </main>
+          <MyCard title="Coronavirus Cases" className="card1">
+            <InfoBox title="Today" content={convertNumber(data.todayCases)} />
+            <InfoBox title="Total" content={convertNumber(data.cases)} />
+          </MyCard>
+          <MyCard title="Coronavirus Recovered" className="card2">
+            <InfoBox
+              title="Today"
+              content={convertNumber(data.todayRecovered)}
+            />
+            <InfoBox title="Total" content={convertNumber(data.recovered)} />
+          </MyCard>
+          <MyCard title="Coronavirus Deaths" className="card3">
+            <InfoBox title="Today" content={convertNumber(data.todayDeaths)} />
+            <InfoBox title="Total" content={convertNumber(data.deaths)} />
+          </MyCard>
+          <div className="map-container map">
+            <MapBoxTwo data={data} allCountries={allCountries} />
+          </div>
         </div>
       ) : (
         <Loader />
